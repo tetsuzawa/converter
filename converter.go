@@ -190,28 +190,6 @@ func Float64sToInt16s(fs []float64) []int16 {
 	return is
 }
 
-func Bytes2int(bytes ...byte) int64 {
-	if 0x7f < bytes[0] {
-		mask := uint64(1<<uint(len(bytes)*8-1) - 1)
-
-		bytes[0] &= 0x7f
-		i := Bytes2uint(bytes...)
-		i = (^i + 1) & mask
-		return int64(-i)
-
-	} else {
-		i := Bytes2uint(bytes...)
-		return int64(i)
-	}
-}
-
-// Bytes2uint converts []byte to uint64
-func Bytes2uint(bytes ...byte) uint64 {
-	padding := make([]byte, 8-len(bytes))
-	i := binary.LittleEndian.Uint64(append(padding, bytes...))
-	return i
-}
-
 // Int2bytes converts int to []byte
 func Int2bytes(i int, size int) []byte {
 	var ui uint64
@@ -236,7 +214,7 @@ func BytesToInt16(b []byte) int16 {
 	return i
 }
 
-func bytesToInt16s(bs []byte) []int16 {
+func BytesToInt16s(bs []byte) []int16 {
 	is := make([]int16, len(bs)/2)
 	var idx int
 	for i := 0; i < len(bs)/2; i++ {
