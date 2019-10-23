@@ -201,7 +201,7 @@ func Float64sToInt16s(fs []float64) []int16 {
 	return is
 }
 
-func Int16sFloat32s(is []int16) []float32 {
+func Int16sToFloat32s(is []int16) []float32 {
 	is = NormalizeInt16s(is)
 	fs := make([]float32, len(is))
 	for i, s := range is {
@@ -210,7 +210,7 @@ func Int16sFloat32s(is []int16) []float32 {
 	return fs
 }
 
-func Int16sFloat64s(is []int16) []float64 {
+func Int16sToFloat64s(is []int16) []float64 {
 	is = NormalizeInt16s(is)
 	fs := make([]float64, len(is))
 	for i, s := range is {
