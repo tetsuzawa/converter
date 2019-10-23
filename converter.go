@@ -151,6 +151,18 @@ func BytesToFloat64s(bs []byte) []float64 {
 	return fs
 }
 
+func NormalizeInt16s(is []int16) []int16 {
+	fs64 := make([]float64, len(is))
+	for i, s := range is {
+		fs64[i] = float64(s)
+	}
+	m := floats.Max(fs64)
+	for i, s := range fs64 {
+		is[i] = int16(s / m * math.MaxInt16)
+	}
+	return is
+}
+
 func NormalizeFloat32s(fs []float32) []float32 {
 	fs64 := make([]float64, len(fs))
 	for i, s := range fs {
@@ -182,6 +194,16 @@ func Float32sToInt16s(fs []float32) []int16 {
 
 func Float64sToInt16s(fs []float64) []int16 {
 	fs = NormalizeFloat64s(fs)
+	is := make([]int16, len(fs))
+	for i, s := range fs {
+		is[i] = int16(s * math.MaxInt16)
+	}
+	return is
+}
+
+func Int16sFloat32s(is []int16) []float32 {
+	is = NormalizeFloat32s()
+	fs = NormalizeFloat32s(fs)
 	is := make([]int16, len(fs))
 	for i, s := range fs {
 		is[i] = int16(s * math.MaxInt16)
