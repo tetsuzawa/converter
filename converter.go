@@ -32,8 +32,7 @@ func BytesToFloat64(b []byte) float64 {
 	return f
 }
 
-
-func Uint16ToBytes(ui uint16) []byte{
+func Uint16ToBytes(ui uint16) []byte {
 	b := make([]byte, 2)
 	binary.LittleEndian.PutUint16(b, ui)
 	return b
@@ -44,7 +43,7 @@ func BytesToUint16(b []byte) uint16 {
 	return ui
 }
 
-func Uint32ToBytes(ui uint32) []byte{
+func Uint32ToBytes(ui uint32) []byte {
 	b := make([]byte, 4)
 	binary.LittleEndian.PutUint32(b, ui)
 	return b
@@ -55,7 +54,7 @@ func BytesToUint32(b []byte) uint32 {
 	return ui
 }
 
-func Uint64ToBytes(ui uint64) []byte{
+func Uint64ToBytes(ui uint64) []byte {
 	b := make([]byte, 8)
 	binary.LittleEndian.PutUint64(b, ui)
 	return b
@@ -226,4 +225,12 @@ func BytesToInt16s(bs []byte) []int16 {
 		is[i] = in
 	}
 	return is
+}
+
+func Float64sToComplex128s(fs []float64) []complex128 {
+	cs := make([]complex128, len(fs))
+	for i, f := range fs {
+		cs[i] = complex(f, 0)
+	}
+	return cs
 }
