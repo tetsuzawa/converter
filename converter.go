@@ -202,13 +202,21 @@ func Float64sToInt16s(fs []float64) []int16 {
 }
 
 func Int16sFloat32s(is []int16) []float32 {
-	is = NormalizeFloat32s()
-	fs = NormalizeFloat32s(fs)
-	is := make([]int16, len(fs))
-	for i, s := range fs {
-		is[i] = int16(s * math.MaxInt16)
+	is = NormalizeInt16s(is)
+	fs := make([]float32, len(is))
+	for i, s := range is {
+		fs[i] = float32(s) / math.MaxInt16 * math.MaxFloat32
 	}
-	return is
+	return fs
+}
+
+func Int16sFloat64s(is []int16) []float64 {
+	is = NormalizeInt16s(is)
+	fs := make([]float64, len(is))
+	for i, s := range is {
+		fs[i] = float64(s) / math.MaxInt16 * math.MaxFloat64
+	}
+	return fs
 }
 
 // Int2bytes converts int to []byte
